@@ -1,0 +1,54 @@
+.box {
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    color: white;
+    font-size: 30px;
+    line-height: 100px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.demo-1 {
+    width: 200px;
+    height: 200px;
+    background: #f40;
+}
+
+/*
+    animation 动画效果（升级版transition）
+    参数(按顺序)：
+    动画定义属性 animation-name : keyframename / none
+    动画时间 animation-duration : 必须，秒 / 毫秒为单位
+    时间函数 timing-function : linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier(a,b,c,d) 
+    动画延迟 animation-delay  
+    播放次数 iteration-count : number / infinite
+    播放方向 direction : normal / alternate
+    停止播放状态 fill-mode : forwards（播完动画停留在最后一桢） / backwards（开始播放从第一桢） / both
+    是否暂停 play-state : running / paused(暂停动画）
+*/
+.demo-1:hover {
+    animation: move 1s linear 2 alternate forwards;
+}
+
+@keyframes move {
+    100% {
+        transform: translateX(200px);
+    }
+}
+
+/* 跳动的小球，在控制台选择合适的cubic-bezier */
+.demo-2 {
+    border-radius: 50%;
+    background-color: blue;
+    animation: jump 1s cubic-bezier(0.41, 0.01, 0.77, 0.28) infinite alternate;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0px)
+    }
+    100% {
+        transform: translateY(200px)
+    }
+}
