@@ -1,0 +1,27 @@
+.loading {
+    width: 100px;
+    height: 100px;
+    background: url('./loading.png') no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    animation: round 1s linear 3;
+}
+
+@keyframes round {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.demo-3 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin: 20px;
+    color: white;
+    transition: transform 2s ease;
+}
+
+.demo-3:hover {
+    transform: rotate(45deg)
+}
