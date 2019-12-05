@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carousel</title>
+    <link rel="stylesheet" href="./carousel.css">
+</head>
+<body>
+    <div class="carousel">
+        <div class="content">
+            <div class="list"><img src="./timg.png" alt=""></div>
+            <div class="list"><img src="./timg1.png" alt=""></div>
+            <div class="list"><img src="./timg2.png" alt=""></div>
+            <div class="list"><img src="./timg.png" alt=""></div>
+        </div>
+    </div>
+    <button id="preBtn"> << Pre</button>
+    <button id="nextBtn"> >> Next</button>
+    <button id="autoPlay">Auto</button>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    $(() => {
+        console.log('页面元素加载完执行');
+        let outerHeight = 200,
+            outerWidth = 200,
+            speed = 1,
+            initIndex = 0,
+            setTimeid = null,
+            transitionTime = .3;
+        let $carousel = $('.carousel');
+        let $content = $carousel.find('.content');
+        let $list = $content.find('.list');
+        let listLength = $list.length;
+        let contentWidth = outerWidth * listLength;
+        let style = document.styleSheets;
+        let timer = null;
+        console.log(style);
+        $carousel.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeight}px`
+        })
+        $list.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeight}px`
+        })
+        $content.css({
+            "width": `${contentWidth}px`,
+            "height": `${outerHeight}px`,
+            // "animation": `run ${speed*listLength}s linear infinite`
+        })
+        
+        function autoPlay() {
+            setInterval(() => {
+                // console.log(initIndex, listLength)
+                initIndex ++;
+                $content.css ({
+                    "transition": `transform ${transitionTime}s ease`,
+                    "transform": `translateX(-${outerWidth * initIndex}px)`
+                })
+                initIndex === (listLength - 1) ? (initIndex = 0) : '';
+            }, speed * 1000)
+        }
+        // autoPlay();
+        $content[0].addEventListener('transitionend', () => {
+            $content.css({
+                "transition": "none",
+                "transform": `translateX(-${outerWidth * initIndex}px)`
+            })
+        })
+        $('#nextBtn').click(() => {   
+            initIndex --;
+            $content.css ({
+                "transition": `transform ${transitionTime}s ease`,
+                "transform": `translateX(-${outerWidth * initIndex}px)`
+            })
+            initIndex === 0 ? initIndex = listLength - 1: '';
+        }).on('mouseenter', () => {
+            if(initIndex === 0) {
+                initIndex = listLength - 1;
+                $content.css({
+                    "transition": "none",
+                    "transform": `translateX(-${outerWidth * initIndex}px)`
+                })
+            }
+        })
+        
+        $('#preBtn').click(() => {
+            initIndex ++;
+            $content.css ({
+                "transition": `transform ${transitionTime}s ease`,
+                "transform": `translateX(-${outerWidth * initIndex}px)`
+            })
+            initIndex === listLength - 1 ? (initIndex = 0) : '';
+        }).on('mouseover', () => {
+            if(initIndex === listLength - 1) {
+                initIndex = 0;
+                $content.css({
+                    "transition": "none",
+                    "transform": `translateX(-${outerWidth * initIndex}px)`
+                })
+            }
+        })
+
+        $('#autoPlay').click(()=> {
+            autoPlay();
+        })
+    })
+</script>
+</html>
