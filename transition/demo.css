@@ -1,0 +1,33 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background: #f40;
+    margin: 20px;
+    color: white;
+}
+
+.box:hover {
+    width: 500px;
+}
+
+/* transition: 过渡， params：属性名，过渡时长，时间函数，延迟时长 */
+.demo-1 {
+    transition: width 2s linear 2s;
+}
+
+.demo-2 {
+    transition: width 2s ease;
+}
+
+.demo-3 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin: 20px;
+    color: white;
+    transition: transform 2s ease;
+}
+
+.demo-3:hover {
+    transform: rotate(45deg)
+}
