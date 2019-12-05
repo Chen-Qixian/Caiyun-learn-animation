@@ -1,0 +1,13 @@
+.marquee {
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+}
+
+.content .list {
+    box-sizing: border-box;
+    overflow: hidden;
+    flex: 1;
+}

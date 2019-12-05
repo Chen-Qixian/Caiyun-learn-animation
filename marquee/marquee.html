@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marquee</title>
+    <link rel="stylesheet" href="./marquee.css">
+</head>
+<body>
+    <div class="marquee">
+        <div class="content">
+            <div class="list"><img src="./timg.png" alt=""></div>
+            <div class="list"><img src="./timg1.png" alt=""></div>
+            <div class="list"><img src="./timg2.png" alt=""></div>
+            <div class="list"><img src="./timg.png" alt=""></div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    $(() => {
+        console.log('页面元素加载完执行');
+        let outerHeight = 200,
+            outerWidth = 200,
+            speed = 1;
+        let $marquee = $('.marquee');
+        let $content = $marquee.find('.content');
+        let $list = $content.find('.list');
+        let listLength = $list.length;
+        let contentWidth = outerWidth * listLength;
+        let style = document.styleSheets;
+        console.log(style);
+        $marquee.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeight}px`
+        })
+        $list.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeight}px`
+        })
+        $content.css({
+            "width": `${contentWidth}px`,
+            "height": `${outerHeight}px`,
+            "animation": `run ${speed*listLength}s linear 1s infinite`
+        })
+        style[0].insertRule(`
+            @keyframes run {
+                100% {
+                    transform: translateX(-${contentWidth - outerWidth}px);
+                }
+            }
+        `)
+    })
+</script>
+</html>
